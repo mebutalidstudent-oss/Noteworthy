@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noteworthy - Professional Notes Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+</head>
+<body>
+    <!-- Startup Animation Screen -->
+    <div id="startup-screen" class="startup-screen">
+        <div class="startup-logo">
+            <div class="startup-logo-icon">
+                <i class="fas fa-clipboard-list"></i>
+            </div>
+            <h1>Noteworthy</h1>
+            <p class="startup-tagline">Professional Notes Management</p>
+            <div class="startup-loader"></div>
+        </div>
+    </div>
+
+    <div id="app">
+        <!-- Authentication Section -->
+        <div id="auth-section" class="section">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <div class="auth-logo-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h1>Noteworthy</h1>
+                </div>
+                <p class="auth-subtitle">Professional notes management solution</p>
+            </div>
+
+            <div id="auth-forms">
+                <!-- Sign Up Form -->
+                <div id="signup-form" class="auth-form">
+                    <div class="form-header">
+                        <h2>Create Account</h2>
+                        <p>Start organizing your notes professionally</p>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="signup-email">Email Address</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="signup-email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="signup-password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="signup-password" placeholder="••••••••" required>
+                        </div>
+                        <small class="text-secondary mt-1">Minimum 6 characters</small>
+                    </div>
+                    
+                    <button id="signup-btn" class="btn btn-primary btn-block">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                    
+                    <div class="auth-switch">
+                        <p>Already have an account? <a href="#" id="show-signin">Sign In</a></p>
+                    </div>
+                </div>
+
+                <!-- Sign In Form -->
+                <div id="signin-form" class="auth-form hidden">
+                    <div class="form-header">
+                        <h2>Welcome Back</h2>
+                        <p>Sign in to your account</p>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="signin-email">Email Address</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="signin-email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="signin-password">Password</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="signin-password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                    
+                    <button id="signin-btn" class="btn btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                    
+                    <div class="auth-switch">
+                        <p>Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="notes-section" class="section hidden">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <div class="header-left">
+                    <div class="dashboard-logo">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h1>Noteworthy</h1>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="user-avatar" id="user-avatar">
+                            <span>JD</span>
+                        </div>
+                        <div class="user-info">
+                            <span class="user-email" id="user-email">john@example.com</span>
+                            <span class="user-role">Premium User</span>
+                        </div>
+                    </div>
+                    <button id="logout-btn" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="dashboard-content">
+                <!-- Sidebar -->
+                <div class="dashboard-sidebar">
+                   <!-- In your HTML, update the sidebar navigation section -->
+<div class="sidebar-section">
+    <div class="section-title">Main</div>
+    <div class="sidebar-nav">
+        <a href="#" class="nav-item active" data-filter="all">
+            <i class="fas fa-sticky-note"></i>
+            <span>All Notes</span>
+        </a>
+        <a href="#" class="nav-item" data-filter="starred">
+            <i class="fas fa-star"></i>
+            <span>Starred</span>
+        </a>
+        <a href="#" class="nav-item" data-filter="archived">
+            <i class="fas fa-archive"></i>
+            <span>Archived</span>
+        </a>
+    </div>
+</div>
+
+<div class="sidebar-section">
+    <div class="section-title">Tags</div>
+    <div class="sidebar-nav">
+        <a href="#" class="nav-item" data-filter="work">
+            <i class="fas fa-tag" style="color: #10b981;"></i>
+            <span>Work</span>
+        </a>
+        <a href="#" class="nav-item" data-filter="personal">
+            <i class="fas fa-tag" style="color: #8b5cf6;"></i>
+            <span>Personal</span>
+        </a>
+        <a href="#" class="nav-item" data-filter="ideas">
+            <i class="fas fa-tag" style="color: #f59e0b;"></i>
+            <span>Ideas</span>
+        </a>
+    </div>
+</div>
+                    
+                    <div class="sidebar-section">
+                        <div class="section-title">Stats</div>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <div class="stat-value" id="notes-count">0</div>
+                                <div class="stat-label">Total Notes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="media-count">0</div>
+                                <div class="stat-label">With Media</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="starred-count">0</div>
+                                <div class="stat-label">Starred</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notes Area -->
+                <div class="notes-main">
+                    <!-- Create Note Card -->
+                    <div class="create-note-card">
+                        <div class="card-header">
+                            <h2>Create New Note</h2>
+                        </div>
+                        
+                        <div class="note-editor">
+                            <!-- Tag Selection -->
+                            <div class="tag-selection">
+                                <div class="tag-option work selected" data-tag="work">
+                                    <i class="fas fa-briefcase"></i>
+                                    <span>Work</span>
+                                </div>
+                                <div class="tag-option personal" data-tag="personal">
+                                    <i class="fas fa-user"></i>
+                                    <span>Personal</span>
+                                </div>
+                                <div class="tag-option ideas" data-tag="ideas">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>Ideas</span>
+                                </div>
+                                <div class="tag-option important" data-tag="important">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Important</span>
+                                </div>
+                                <div class="tag-option other" data-tag="other">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                    <span>Other</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Rich Text Editor -->
+                            <div id="rich-text-editor" class="rich-text-editor">
+                                <div class="editor-toolbar">
+                                    <button type="button" data-command="bold" title="Bold (Ctrl+B)">
+                                        <i class="fas fa-bold"></i>
+                                    </button>
+                                    <button type="button" data-command="italic" title="Italic (Ctrl+I)">
+                                        <i class="fas fa-italic"></i>
+                                    </button>
+                                    <button type="button" data-command="underline" title="Underline (Ctrl+U)">
+                                        <i class="fas fa-underline"></i>
+                                    </button>
+                                    <div class="separator"></div>
+                                    <button type="button" data-command="insertUnorderedList" title="Bullet List">
+                                        <i class="fas fa-list-ul"></i>
+                                    </button>
+                                    <button type="button" data-command="insertOrderedList" title="Numbered List">
+                                        <i class="fas fa-list-ol"></i>
+                                    </button>
+                                    <div class="separator"></div>
+                                    <button type="button" data-command="createLink" title="Insert Link">
+                                        <i class="fas fa-link"></i>
+                                    </button>
+                                    <button type="button" data-command="formatBlock" data-value="h3" title="Heading">
+                                        <i class="fas fa-heading"></i>
+                                    </button>
+                                    <div class="separator"></div>
+                                    <button type="button" data-command="undo" title="Undo (Ctrl+Z)">
+                                        <i class="fas fa-undo"></i>
+                                    </button>
+                                    <button type="button" data-command="redo" title="Redo (Ctrl+Y)">
+                                        <i class="fas fa-redo"></i>
+                                    </button>
+                                </div>
+                                <div 
+                                    id="note-content" 
+                                    class="rich-text-content" 
+                                    contenteditable="true" 
+                                    placeholder="Start typing your note here..."
+                                ></div>
+                            </div>
+                            
+                            <label for="media-upload" class="media-section">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Upload images or videos</p>
+                                <small>Click or drag & drop to upload files</small>
+                            </label>
+                            <input type="file" id="media-upload" accept="image/*, video/*">
+                            
+                            <div id="file-preview" class="preview-container"></div>
+                            
+                            <button id="create-note-btn" class="btn btn-primary">
+                                <i class="fas fa-plus-circle"></i> Create Note
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Notes List -->
+                    <div class="notes-section">
+                        <div class="section-header">
+                            <h2>Your Notes</h2>
+                            <div class="notes-count">
+                                <span id="notes-total">0</span> notes
+                            </div>
+                        </div>
+                        
+                        <!-- Filter Bar -->
+                        <div class="filter-bar">
+                            <button class="filter-btn active" data-filter="all">
+                                <i class="fas fa-layer-group"></i>
+                                <span>All Notes</span>
+                            </button>
+                            <button class="filter-btn" data-filter="starred">
+                                <i class="fas fa-star"></i>
+                                <span>Starred</span>
+                            </button>
+                            <button class="filter-btn" data-filter="archived">
+                                <i class="fas fa-archive"></i>
+                                <span>Archived</span>
+                            </button>
+                            <button class="filter-btn" data-filter="work">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Work</span>
+                            </button>
+                            <button class="filter-btn" data-filter="personal">
+                                <i class="fas fa-user"></i>
+                                <span>Personal</span>
+                            </button>
+                            <button class="filter-btn" data-filter="ideas">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Ideas</span>
+                            </button>
+                        </div>
+                        
+                        <div id="notes-container">
+                            <!-- Notes will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Toast -->
+    <div id="status-toast" class="status-toast hidden">
+        <i class="fas fa-check-circle"></i>
+        <span id="status-message"></span>
+    </div>
+
+    <!-- Full Note View Modal -->
+    <div id="note-modal" class="note-modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-note-title">
+                    <i class="fas fa-sticky-note"></i>
+                    <span id="modal-note-tag"></span>
+                </h2>
+                <button class="modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-note-content rich-text-display" id="modal-note-content"></div>
+                <div class="modal-media" id="modal-note-media"></div>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="modal-meta">
+                    <span id="modal-note-date"></span>
+                    <div class="note-status">
+                        <span id="modal-note-status"></span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="note-action-btn" id="modal-star-btn">
+                        <i class="fas fa-star"></i>
+                        <span>Star</span>
+                    </button>
+                    <button class="note-action-btn" id="modal-archive-btn">
+                        <i class="fas fa-archive"></i>
+                        <span>Archive</span>
+                    </button>
+                    <button class="note-action-btn" id="modal-edit-btn">
+                        <i class="fas fa-edit"></i>
+                        <span>Edit</span>
+                    </button>
+                    <button class="note-action-btn" id="modal-delete-btn">
+                        <i class="fas fa-trash"></i>
+                        <span>Delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Menu -->
+    <div class="quick-actions">
+        <button class="action-toggle" id="action-toggle">
+            <i class="fas fa-plus"></i>
+        </button>
+        <div class="action-menu" id="action-menu">
+            <button class="action-item star" id="action-star">
+                <i class="fas fa-star"></i>
+                                <span>Star Selected</span>
+            </button>
+            <button class="action-item archive" id="action-archive">
+                <i class="fas fa-archive"></i>
+                <span>Archive Selected</span>
+            </button>
+            <button class="action-item delete" id="action-delete">
+                <i class="fas fa-trash"></i>
+                <span>Delete Selected</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

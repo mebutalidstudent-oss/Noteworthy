@@ -1,35 +1,43 @@
-# Noteworthy
-Create personal notes, work reminders, or save random thoughts anytime. Add images, videos, and rich media to bring your ideas to life—all in one clean and easy-to-use space.
+# Notes Website
 
-# Group Members
+A simple web application for creating, reading, updating, and deleting notes with media upload functionality.
 
-Mark Reyland Butalid
+## Group Members
+- [Mark Reyland Butalid]
+- [Ramel Guardario]
+- [Vince Faustorilla]
+- [Danilo Lasin]
+- [Lyzbeth Gumisad]
+- [Mikhail Dayagdag]
 
-Ramel Guardario
+## Project Description
+This is a notes management website that allows users to:
+- Create an account and sign in
+- Create, read, update, and delete notes
+- Upload images and videos with their notes
+- Securely store their data using Supabase
 
-Vince Faustorilla
+## Setup Instructions
 
-Danilo Lasin
+### Prerequisites
+- A Supabase account (free tier available)
+- A web browser
 
-Lyzbeth Gumisad
+### Installation Steps
 
-Mikhail Dayagdag
+1. **Set up Supabase:**
+   - Go to [supabase.com](https://supabase.com) and create an account
+   - Create a new project
+   - Get your project URL and anon key from Settings > API
 
-# Project Description
-
-A modern note-taking platform that keeps your ideas organized. This website allows users to create personal notes, work reminders, or save random thoughts anytime. Users can also attach images, videos, and other media to bring their notes to life—all in one clean and easy-to-use space.
-
-Core Features
-
-User authentication (create an account & sign in)
-
-Create, read, update, and delete notes
-
-Upload images and videos
-
-Secure data storage powered by Supabase
-
-# Project Background
-
-This project was originally planned to be built using an Expo mobile application. However, due to technical issues that prevented it from functioning correctly in our development environment, we shifted to a simpler web-based format.
-Despite this change, the web version fully demonstrates the intended functionalities—allowing users to manage notes, upload media, and experience the core features as envisioned.
+2. **Configure the Database:**
+   - In the Supabase dashboard, go to the SQL Editor
+   - Run the following SQL to create the notes table:
+   ```sql
+   CREATE TABLE notes (
+     id SERIAL PRIMARY KEY,
+     user_id UUID REFERENCES auth.users(id),
+     content TEXT NOT NULL,
+     media_url TEXT,
+     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+   );
